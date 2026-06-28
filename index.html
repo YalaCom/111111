@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Неоновый сайт</title>
+    <style>
+        /* Сброс отступов и настройка шрифта */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Анимированный фон сайта */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #000000, #24243e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden; /* Скрываем ползунки прокрутки */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимированные светящиеся бока */
+        .animated-borders {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none; /* Чтобы рамка не мешала кликать на кнопку */
+            z-index: 999;
+            box-shadow: inset 0 0 20px #0ff, inset 0 0 40px #0ff;
+            animation: pulsateBorder 3s infinite alternate;
+        }
+
+        @keyframes pulsateBorder {
+            0% { box-shadow: inset 0 0 10px #ff00ff, inset 0 0 30px #ff00ff; }
+            50% { box-shadow: inset 0 0 20px #00ffff, inset 0 0 50px #00ffff; }
+            100% { box-shadow: inset 0 0 15px #ff0055, inset 0 0 40px #ff0055; }
+        }
+
+        /* Стиль кнопки */
+        button {
+            padding: 20px 60px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            z-index: 10;
+        }
+
+        button:hover {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff;
+            transform: scale(1.1);
+            border-color: #ffffff;
+        }
+
+        /* Стиль неоновой надписи */
+        #neonText {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85); /* Затемнение фона */
+            justify-content: center;
+            align-items: center;
+            font-size: 10vw; /* Размер адаптируется под экран */
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #ffffff;
+            z-index: 1000;
+            /* Неоновое свечение */
+            text-shadow:
+                0 0 10px #fff,
+                0 0 20px #fff,
+                0 0 40px #ff00ff,
+                0 0 80px #ff00ff,
+                0 0 120px #ff00ff;
+            animation: appear 0.5s ease-out forwards, flicker 2s infinite alternate;
+        }
+
+        /* Анимация появления надписи */
+        @keyframes appear {
+            from { opacity: 0; transform: scale(0.2); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Анимация мерцания неона */
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow:
+                0 0 10px #fff,
+                0 0 20px #fff,
+                0 0 40px #ff00ff,
+                0 0 80px #ff00ff,
+                0 0 120px #ff00ff;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-borders"></div>
+
+    <button id="clickBtn">Нажми</button>
+
+    <div id="neonText">Нажал...</div>
+
+    <script>
+        // Находим элементы
+        const btn = document.getElementById('clickBtn');
+        const text = document.getElementById('neonText');
+
+        // Добавляем событие клика на кнопку
+        btn.addEventListener('click', () => {
+            // Скрываем кнопку
+            btn.style.display = 'none';
+            // Показываем неоновый текст (используем flex, чтобы текст был по центру)
+            text.style.display = 'flex';
+        });
+    </script>
+
+</body>
+</html>
